@@ -1,12 +1,19 @@
-import { Mail, Send, Github, MessageCircle } from "lucide-react";
+import { Mail, Send, Github, MessageCircle, Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from "@/components/language-provider";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Contact() {
   const { t } = useLanguage();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   
   const socialLinks = [
     { icon: "telegram", label: "Telegram", color: "bg-sky", link: "https://t.me/DevHackerG" },
@@ -66,24 +73,77 @@ export default function Contact() {
           </div>
 
           <div className="bg-white dark:bg-black p-8 md:p-12 border-t-2 md:border-t-0 md:border-l-2 border-ink dark:border-white/20">
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-4" onSubmit={async (e) => {
+              e.preventDefault();
+              setLoading(true);
+              try {
+                const response = await fetch("/api/contact", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(formData),
+                });
+                if (response.ok) {
+                  toast.success("Message sent successfully!");
+                  setFormData({ name: "", email: "", message: "" });
+                } else {
+                  const error = await response.json();
+                  toast.error(error.message || "Failed to send message");
+                }
+              } catch (error) {
+                toast.error("An error occurred while sending your message");
+              } finally {
+                setLoading(false);
+              }
+            }}>
               <div className="space-y-2">
                 <label className="font-heading font-bold text-ink dark:text-white text-sm uppercase">{t.contact.nameLabel}</label>
-                <Input className="bg-background border-2 border-ink dark:border-white/20 focus-visible:ring-0 focus-visible:border-coral rounded-lg h-12 font-sans" placeholder={t.contact.namePlaceholder} />
+                <Input 
+                  className="bg-background border-2 border-ink dark:border-white/20 focus-visible:ring-0 focus-visible:border-coral rounded-lg h-12 font-sans" 
+                  placeholder={t.contact.namePlaceholder}
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  disabled={loading}
+                />
               </div>
               
               <div className="space-y-2">
                 <label className="font-heading font-bold text-ink dark:text-white text-sm uppercase">{t.contact.emailLabel}</label>
-                <Input className="bg-background border-2 border-ink dark:border-white/20 focus-visible:ring-0 focus-visible:border-coral rounded-lg h-12 font-sans" placeholder={t.contact.emailPlaceholder} />
+                <Input 
+                  className="bg-background border-2 border-ink dark:border-white/20 focus-visible:ring-0 focus-visible:border-coral rounded-lg h-12 font-sans" 
+                  placeholder={t.contact.emailPlaceholder}
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  disabled={loading}
+                />
               </div>
               
               <div className="space-y-2">
                 <label className="font-heading font-bold text-ink dark:text-white text-sm uppercase">{t.contact.messageLabel}</label>
-                <Textarea className="bg-background border-2 border-ink dark:border-white/20 focus-visible:ring-0 focus-visible:border-coral rounded-lg min-h-[120px] font-sans resize-none" placeholder={t.contact.messagePlaceholder} />
+                <Textarea 
+                  className="bg-background border-2 border-ink dark:border-white/20 focus-visible:ring-0 focus-visible:border-coral rounded-lg min-h-[120px] font-sans resize-none" 
+                  placeholder={t.contact.messagePlaceholder}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  disabled={loading}
+                />
               </div>
 
-              <Button className="w-full h-12 bg-ink text-white font-heading font-bold text-lg rounded-xl hover:bg-coral hover:shadow-hard-sm transition-all border-2 border-transparent hover:border-ink dark:hover:border-white mt-2">
-                {t.contact.sendButton} <Send className="w-4 h-4 ml-2" />
+              <Button 
+                type="submit"
+                className="w-full h-12 bg-ink text-white font-heading font-bold text-lg rounded-xl hover:bg-coral hover:shadow-hard-sm transition-all border-2 border-transparent hover:border-ink dark:hover:border-white mt-2 disabled:opacity-50"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <Loader className="w-4 h-4 mr-2 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    {t.contact.sendButton} <Send className="w-4 h-4 ml-2" />
+                  </>
+                )}
               </Button>
             </form>
           </div>
