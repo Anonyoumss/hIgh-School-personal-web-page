@@ -11,7 +11,6 @@ export default function Contact() {
   const socialLinks = [
     { icon: "telegram", label: "Telegram", color: "bg-sky", link: "#" },
     { icon: "whatsapp", label: "WhatsApp", color: "bg-teal", link: "#" },
-    { icon: "discord", label: "Discord", color: "bg-purple-500", link: "#" },
     { icon: "youtube", label: "YouTube", color: "bg-coral", link: "#" },
     { icon: "github", label: "GitHub", color: "bg-ink dark:bg-white", link: "https://github.com/Anonyoumss/" }
   ];
@@ -58,7 +57,7 @@ export default function Contact() {
               {t.contact.subtitle}
             </p>
             
-            <div className="grid grid-cols-5 gap-4">
+            <div className="grid grid-cols-4 gap-4">
               {socialLinks.map((social) => (
                 <a key={social.label} href={social.link} className={`flex items-center justify-center p-3 rounded-full border-2 border-ink dark:border-white/20 hover:scale-110 transition-transform group ${social.color} ${social.color === "bg-ink dark:bg-white" ? "text-white dark:text-ink" : "text-white"}`}>
                   <IconComponent icon={social.icon} />
