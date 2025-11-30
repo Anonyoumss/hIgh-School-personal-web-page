@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Code, BookOpen, Star, MapPin, GraduationCap, Box, Brain, Cpu, Palette, Atom, Sigma, BarChart3 } from "lucide-react";
+import { Code, BookOpen, Megaphone, MapPin, GraduationCap, Box, Brain, Cpu, Palette, Atom, Sigma, BarChart3 } from "lucide-react";
 import { useLanguage } from "@/components/language-provider";
 
 export default function About() {
@@ -100,7 +100,7 @@ export default function About() {
                   <Atom className="w-4 h-4 text-white" /> {t.about.learning2}
                 </li>
                 <li className="flex items-center gap-2">
-                  <Star className="w-4 h-4 text-white fill-white stroke-ink" /> {t.about.learning3}
+                  <Megaphone className="w-4 h-4 text-white" /> {t.about.learning3}
                 </li>
               </ul>
             </div>
