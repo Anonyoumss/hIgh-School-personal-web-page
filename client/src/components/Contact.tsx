@@ -9,6 +9,7 @@ import { toast } from "sonner";
 export default function Contact() {
   const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -50,8 +51,34 @@ export default function Contact() {
     }
   };
 
+  const validateForm = () => {
+    const newErrors: { name?: string; email?: string; message?: string } = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email";
+    }
+    
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
     setLoading(true);
     try {
       const response = await fetch("/api/contact", {
@@ -62,6 +89,7 @@ export default function Contact() {
       if (response.ok) {
         toast.success("Message sent successfully!");
         setFormData({ name: "", email: "", message: "" });
+        setErrors({});
       } else {
         const error = await response.json();
         toast.error(error.message || "Failed to send message");
@@ -100,35 +128,38 @@ export default function Contact() {
               <div className="space-y-2">
                 <label className="font-heading font-bold text-ink dark:text-white text-sm uppercase">{t.contact.nameLabel}</label>
                 <Input 
-                  className="bg-background border-2 border-ink dark:border-white/20 focus-visible:ring-0 focus-visible:border-coral rounded-lg h-12 font-sans" 
+                  className={`bg-background border-2 rounded-lg h-12 font-sans focus-visible:ring-0 ${errors.name ? "border-red-500 focus-visible:border-red-500" : "border-ink dark:border-white/20 focus-visible:border-coral"}`}
                   placeholder={t.contact.namePlaceholder}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   disabled={loading}
                 />
+                {errors.name && <p className="text-red-500 text-sm font-sans">{errors.name}</p>}
               </div>
               
               <div className="space-y-2">
                 <label className="font-heading font-bold text-ink dark:text-white text-sm uppercase">{t.contact.emailLabel}</label>
                 <Input 
-                  className="bg-background border-2 border-ink dark:border-white/20 focus-visible:ring-0 focus-visible:border-coral rounded-lg h-12 font-sans" 
+                  className={`bg-background border-2 rounded-lg h-12 font-sans focus-visible:ring-0 ${errors.email ? "border-red-500 focus-visible:border-red-500" : "border-ink dark:border-white/20 focus-visible:border-coral"}`}
                   placeholder={t.contact.emailPlaceholder}
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   disabled={loading}
                 />
+                {errors.email && <p className="text-red-500 text-sm font-sans">{errors.email}</p>}
               </div>
               
               <div className="space-y-2">
                 <label className="font-heading font-bold text-ink dark:text-white text-sm uppercase">{t.contact.messageLabel}</label>
                 <Textarea 
-                  className="bg-background border-2 border-ink dark:border-white/20 focus-visible:ring-0 focus-visible:border-coral rounded-lg min-h-[120px] font-sans resize-none" 
+                  className={`bg-background border-2 rounded-lg min-h-[120px] font-sans resize-none focus-visible:ring-0 ${errors.message ? "border-red-500 focus-visible:border-red-500" : "border-ink dark:border-white/20 focus-visible:border-coral"}`}
                   placeholder={t.contact.messagePlaceholder}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   disabled={loading}
                 />
+                {errors.message && <p className="text-red-500 text-sm font-sans">{errors.message}</p>}
               </div>
 
               <Button 
