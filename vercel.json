@@ -1,32 +1,32 @@
 {
-"version": 2,
-"builds": [
-{
-"src": "package.json",
-"use": "@vercel/static-build",
-"config": {
-"distDir": "dist/public"
-}
-},
-{
-"src": "package.json",
-"use": "@vercel/node",
-"config": {
-"includeFiles": [
-"dist/index.cjs"
-]
-}
-}
-],
-"rewrites": [
-{
-"source": "/api/(.)",
-"destination": "/dist/index.cjs"
-},
-{
-"source": "/(.)",
-"destination": "/index.html"
-}
-],
-"outputDirectory": "dist/public"
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/public"
+      }
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "dist/index.cjs"
+        ]
+      }
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/dist/index.cjs"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "outputDirectory": "dist/public"
 }
