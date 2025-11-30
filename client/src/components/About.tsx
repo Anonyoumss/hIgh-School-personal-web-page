@@ -70,7 +70,7 @@ export default function About() {
                   { name: "3D Design", icon: Box },
                   { name: "TypeScript", icon: Code },
                   { name: "Machine Learning", icon: Brain },
-                  { name: "Node.js", icon: Cpu },
+                  { name: "Circuit design", icon: Cpu },
                   { name: "Python", icon: Code },
                   { name: "Canva", icon: Palette }
                 ].map((tech) => {
