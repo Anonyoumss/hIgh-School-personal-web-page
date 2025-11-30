@@ -20,7 +20,7 @@ export async function sendContactEmail(data: ContactMessage): Promise<void> {
     await resend.emails.send({
       from: "onboarding@resend.dev",
       to: contactEmail,
-      reply_to: data.email,
+      replyTo: data.email,
       subject: `New Contact Message from ${data.name}`,
       html: `
         <h2>New Contact Message</h2>
