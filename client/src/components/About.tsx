@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Code, BookOpen, Star, MapPin, Calendar, Box, Brain, Cpu, Palette, Zap, BarChart3 } from "lucide-react";
+import { Code, BookOpen, Star, MapPin, GraduationCap, Box, Brain, Cpu, Palette, Zap, BarChart3 } from "lucide-react";
 import { useLanguage } from "@/components/language-provider";
 
 export default function About() {
@@ -41,7 +41,7 @@ export default function About() {
                 <MapPin className="text-coral" /> {t.about.location}
               </div>
               <div className="flex items-center gap-2 text-ink dark:text-white font-bold font-heading">
-                <Calendar className="text-teal" /> {t.about.class}
+                <GraduationCap className="text-teal" /> {t.about.class}
               </div>
               <div className="flex items-center gap-2 text-ink dark:text-white font-bold font-heading">
                 <Code className="text-sky" /> {t.about.stack}
