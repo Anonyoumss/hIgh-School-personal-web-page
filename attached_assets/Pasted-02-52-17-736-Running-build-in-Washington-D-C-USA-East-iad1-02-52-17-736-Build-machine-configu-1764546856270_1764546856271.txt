@@ -1,0 +1,51 @@
+02:52:17.736 Running build in Washington, D.C., USA (East) – iad1
+02:52:17.736 Build machine configuration: 2 cores, 8 GB
+02:52:17.863 Cloning github.com/Anonyoumss/hIgh-School-personal-web-page (Branch: main, Commit: 2fa9ce1)
+02:52:18.478 Cloning completed: 614.000ms
+02:52:18.585 Restored build cache from previous deployment (82GeZRu1NKT6W5r9EBeNtBxbXVtL)
+02:52:19.278 Running "vercel build"
+02:52:19.702 Vercel CLI 48.12.0
+02:52:20.413 Installing dependencies...
+02:52:24.253 
+02:52:24.253 added 112 packages in 4s
+02:52:24.254 
+02:52:24.254 53 packages are looking for funding
+02:52:24.254   run `npm fund` for details
+02:52:24.398 
+02:52:24.401 > rest-express@1.0.0 build
+02:52:24.401 > tsx script/build.ts
+02:52:24.401 
+02:52:25.289 building client...
+02:52:25.547 [36mvite v7.1.12 [32mbuilding for production...[36m[39m
+02:52:25.824 transforming...
+02:52:29.499 [32m✓[39m 2236 modules transformed.
+02:52:29.887 rendering chunks...
+02:52:29.894 [meta-images] no Replit deployment domain found, skipping meta tag updates
+02:52:29.905 computing gzip size...
+02:52:29.925 [2m../dist/public/[22m[32mindex.html                                                                            [39m[1m[2m    1.41 kB[22m[1m[22m[2m │ gzip:   0.57 kB[22m
+02:52:29.925 [2m../dist/public/[22m[2massets/[22m[32man_icon_representing_a_creative_arts_project.-3fDzPBMV.png                     [39m[1m[2m  807.77 kB[22m[1m[22m
+02:52:29.925 [2m../dist/public/[22m[2massets/[22m[32man_icon_representing_a_science_project.-B77wqcf5.png                           [39m[1m[2m  881.38 kB[22m[1m[22m
+02:52:29.926 [2m../dist/public/[22m[2massets/[22m[32man_icon_representing_a_coding_project.-DSQ8gdur.png                            [39m[1m[2m1,050.85 kB[22m[1m[22m
+02:52:29.926 [2m../dist/public/[22m[2massets/[22m[32mteen_profile_with_hood_and_cyan_accents-CnFQL96S.png                           [39m[1m[2m1,142.67 kB[22m[1m[22m
+02:52:29.926 [2m../dist/public/[22m[2massets/[22m[32ma_hero_background_featuring_study_materials_and_coding_elements.-R-K1TZOS.png  [39m[1m[2m1,240.01 kB[22m[1m[22m
+02:52:29.926 [2m../dist/public/[22m[2massets/[22m[35mindex-yMUihfh0.css                                                             [39m[1m[2m  100.60 kB[22m[1m[22m[2m │ gzip:  16.99 kB[22m
+02:52:29.926 [2m../dist/public/[22m[2massets/[22m[36mindex-CdJtn9eU.js                                                              [39m[1m[33m  560.39 kB[39m[22m[2m │ gzip: 175.76 kB[22m
+02:52:29.927 [33m
+02:52:29.927 (!) Some chunks are larger than 500 kB after minification. Consider:
+02:52:29.927 - Using dynamic import() to code-split the application
+02:52:29.927 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+02:52:29.927 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+02:52:29.927 [32m✓ built in 4.14s[39m
+02:52:29.928 building server...
+02:52:30.039 
+02:52:30.040   dist/index.cjs  887.2kb
+02:52:30.040 
+02:52:30.040 ⚡ Done in 110ms
+02:52:30.336 Using TypeScript 5.6.3 (local user-provided)
+02:52:35.987 Build Completed in /vercel/output [16s]
+02:52:36.133 Deploying outputs...
+02:52:41.273 Deployment completed
+02:52:41.865 Creating build cache...
+02:53:03.674 Created build cache: 21.806s
+02:53:03.675 Uploading build cache [82.79 MB]
+02:53:05.469 Build cache uploaded: 1.796s

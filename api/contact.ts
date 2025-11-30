@@ -29,11 +29,17 @@ export default async function handler(
     const apiKey = process.env.RESEND_API_KEY;
     const contactEmail = process.env.CONTACT_EMAIL;
 
-    console.log("[API] Config check - API Key:", !!apiKey, "Email:", contactEmail);
+    console.log("[API] Config check - API Key length:", apiKey?.length, "Email:", contactEmail);
+    console.log("[API] All env vars:", Object.keys(process.env).filter(k => !k.includes('SECRET')));
 
-    if (!apiKey || !contactEmail) {
-      console.error("[API] Missing configuration");
-      return res.status(500).json({ message: "Server configuration error" });
+    if (!apiKey) {
+      console.error("[API] RESEND_API_KEY is missing");
+      return res.status(500).json({ message: "Missing RESEND_API_KEY in environment" });
+    }
+    
+    if (!contactEmail) {
+      console.error("[API] CONTACT_EMAIL is missing");
+      return res.status(500).json({ message: "Missing CONTACT_EMAIL in environment" });
     }
 
     const resend = new Resend(apiKey);
