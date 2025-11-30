@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Code, BookOpen, Coffee, Star, MapPin, Calendar, Box, Brain, Cpu, Palette, Zap, BarChart3 } from "lucide-react";
+import { Code, BookOpen, Star, MapPin, Calendar, Box, Brain, Cpu, Palette, Zap, BarChart3 } from "lucide-react";
 import { useLanguage } from "@/components/language-provider";
 
 export default function About() {
@@ -47,7 +47,7 @@ export default function About() {
                 <Code className="text-sky" /> {t.about.stack}
               </div>
               <div className="flex items-center gap-2 text-ink dark:text-white font-bold font-heading">
-                <Coffee className="text-coffee dark:text-orange-400" /> {t.about.coffee}
+                <BookOpen className="text-sky" /> {t.about.coffee}
               </div>
             </div>
           </motion.div>
