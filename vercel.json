@@ -19,8 +19,14 @@
 }
 ],
 "rewrites": [
-{ "source": "/api/(.)", "destination": "/dist/index.cjs" },
-{ "source": "/(.)", "destination": "/index.html" }
+{
+"source": "/api/(.)",
+"destination": "/dist/index.cjs"
+},
+{
+"source": "/(.)",
+"destination": "/index.html"
+}
 ],
 "outputDirectory": "dist/public"
 }
