@@ -36,3 +36,8 @@ externalPort = 80
 [[ports]]
 localPort = 36617
 externalPort = 3001
+
+[userenv]
+
+[userenv.shared]
+CONTACT_EMAIL = "devhackerg@gmail.com"
