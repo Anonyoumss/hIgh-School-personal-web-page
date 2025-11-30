@@ -1,0 +1,52 @@
+02:31:39.063 Running build in Washington, D.C., USA (East) – iad1
+02:31:39.064 Build machine configuration: 2 cores, 8 GB
+02:31:39.248 Cloning github.com/Anonyoumss/hIgh-School-personal-web-page (Branch: main, Commit: 761e29c)
+02:31:39.855 Cloning completed: 607.000ms
+02:31:39.973 Restored build cache from previous deployment (48LfTVX6ZXrUcNh7btSxVHw1T3kx)
+02:31:40.737 Running "vercel build"
+02:31:41.131 Vercel CLI 48.12.0
+02:31:41.306 WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+02:31:41.855 Installing dependencies...
+02:31:43.504 
+02:31:43.505 up to date in 1s
+02:31:43.505 
+02:31:43.506 43 packages are looking for funding
+02:31:43.506   run `npm fund` for details
+02:31:43.545 Running "npm run build"
+02:31:43.659 
+02:31:43.659 > rest-express@1.0.0 build
+02:31:43.659 > tsx script/build.ts
+02:31:43.659 
+02:31:44.691 building client...
+02:31:44.949 [36mvite v7.1.12 [32mbuilding for production...[36m[39m
+02:31:45.252 transforming...
+02:31:48.946 [32m✓[39m 2236 modules transformed.
+02:31:49.530 rendering chunks...
+02:31:49.537 [meta-images] no Replit deployment domain found, skipping meta tag updates
+02:31:49.548 computing gzip size...
+02:31:49.777 [2m../dist/public/[22m[32mindex.html                                                                            [39m[1m[2m    1.41 kB[22m[1m[22m[2m │ gzip:   0.57 kB[22m
+02:31:49.778 [2m../dist/public/[22m[2massets/[22m[32man_icon_representing_a_creative_arts_project.-3fDzPBMV.png                     [39m[1m[2m  807.77 kB[22m[1m[22m
+02:31:49.778 [2m../dist/public/[22m[2massets/[22m[32man_icon_representing_a_science_project.-B77wqcf5.png                           [39m[1m[2m  881.38 kB[22m[1m[22m
+02:31:49.778 [2m../dist/public/[22m[2massets/[22m[32man_icon_representing_a_coding_project.-DSQ8gdur.png                            [39m[1m[2m1,050.85 kB[22m[1m[22m
+02:31:49.779 [2m../dist/public/[22m[2massets/[22m[32mteen_profile_with_hood_and_cyan_accents-CnFQL96S.png                           [39m[1m[2m1,142.67 kB[22m[1m[22m
+02:31:49.779 [2m../dist/public/[22m[2massets/[22m[32ma_hero_background_featuring_study_materials_and_coding_elements.-R-K1TZOS.png  [39m[1m[2m1,240.01 kB[22m[1m[22m
+02:31:49.779 [2m../dist/public/[22m[2massets/[22m[35mindex-yMUihfh0.css                                                             [39m[1m[2m  100.60 kB[22m[1m[22m[2m │ gzip:  16.99 kB[22m
+02:31:49.779 [2m../dist/public/[22m[2massets/[22m[36mindex-CdJtn9eU.js                                                              [39m[1m[33m  560.39 kB[39m[22m[2m │ gzip: 175.76 kB[22m
+02:31:49.780 [33m
+02:31:49.780 (!) Some chunks are larger than 500 kB after minification. Consider:
+02:31:49.780 - Using dynamic import() to code-split the application
+02:31:49.780 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+02:31:49.780 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+02:31:49.780 [32m✓ built in 4.57s[39m
+02:31:49.780 building server...
+02:31:49.891 
+02:31:49.892   dist/index.cjs  887.2kb
+02:31:49.896 
+02:31:49.896 ⚡ Done in 110ms
+02:31:51.927 Build Completed in /vercel/output [10s]
+02:31:52.031 Deploying outputs...
+02:31:55.554 Deployment completed
+02:31:56.178 Creating build cache...
+02:32:17.105 Created build cache: 20.924s
+02:32:17.105 Uploading build cache [57.43 MB]
+02:32:18.003 Build cache uploaded: 897.369ms
