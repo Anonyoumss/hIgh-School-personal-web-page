@@ -13,7 +13,7 @@ export default function Contact() {
     { icon: "whatsapp", label: "WhatsApp", color: "bg-teal", link: "#" },
     { icon: "discord", label: "Discord", color: "bg-purple-500", link: "#" },
     { icon: "youtube", label: "YouTube", color: "bg-coral", link: "#" },
-    { icon: "github", label: "GitHub", color: "bg-ink dark:bg-white", link: "#" }
+    { icon: "github", label: "GitHub", color: "bg-ink dark:bg-white", link: "https://github.com/Anonyoumss/" }
   ];
 
   const IconComponent = ({ icon }: { icon: string }) => {
