@@ -30,7 +30,7 @@ export default function Navbar() {
       <div className="container mx-auto max-w-6xl flex justify-between items-start">
         {/* Logo / Brand */}
         <div className="pointer-events-auto bg-white dark:bg-ink border-2 border-ink dark:border-white/20 px-4 py-2 rounded-xl shadow-hard-sm flex items-center gap-2">
-          <div className="w-8 h-8 flex items-center justify-center border border-ink dark:border-white/20 rotate-3 hover:rotate-0 transition-transform">
+          <div className="w-8 h-8 bg-cyan-400 rounded-lg flex items-center justify-center border border-ink dark:border-white/20 rotate-3 hover:rotate-0 transition-transform p-1">
             <img src="/favicon.png" alt="Logo" className="w-full h-full object-contain" />
           </div>
           <span className="font-heading font-bold text-lg tracking-tight text-ink dark:text-white hidden sm:inline">
