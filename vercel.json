@@ -3,6 +3,13 @@
 "builds": [
 {
 "src": "package.json",
+"use": "@vercel/static-build",
+"config": {
+"distDir": "dist/public"
+}
+},
+{
+"src": "package.json",
 "use": "@vercel/node",
 "config": {
 "includeFiles": [
@@ -12,14 +19,8 @@
 }
 ],
 "rewrites": [
-{
-"source": "/api/(.)",
-"destination": "/dist/index.cjs"
-},
-{
-"source": "/(.)",
-"destination": "/index.html"
-}
+{ "source": "/api/(.)", "destination": "/dist/index.cjs" },
+{ "source": "/(.)", "destination": "/index.html" }
 ],
 "outputDirectory": "dist/public"
 }
