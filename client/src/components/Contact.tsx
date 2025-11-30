@@ -9,7 +9,9 @@ export default function Contact() {
   const { t } = useLanguage();
   
   const socialLinks = [
-    { icon: "telegram", label: "Telegram", color: "bg-sky", link: "https://t.me/DevHackerG" },
+    { icon: "telegram", label: "Telegram", color: "bg-sky", link: "#" },
+    { icon: "whatsapp", label: "WhatsApp", color: "bg-teal", link: "#" },
+    { icon: "youtube", label: "YouTube", color: "bg-coral", link: "https://www.youtube.com/@Anonyoumss" },
     { icon: "github", label: "GitHub", color: "bg-ink dark:bg-white", link: "https://github.com/Anonyoumss/" }
   ];
 
