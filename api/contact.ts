@@ -1,5 +1,5 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
-import { Resend } from "resend";
+import * as SibApiV3Sdk from "sib-api-v3-sdk";
 import { z } from "zod";
 import { render } from "@react-email/render";
 import { AdminContactEmail } from "./emails/AdminContactEmail";
@@ -28,14 +28,14 @@ export default async function handler(
     const validatedData = contactSchema.parse(req.body);
     console.log("[API] Validation passed");
 
-    const apiKey = process.env.RESEND_API_KEY;
+    const apiKey = process.env.BREVO_API_KEY;
     const contactEmail = process.env.CONTACT_EMAIL;
 
     console.log("[API] Config check - API Key length:", apiKey?.length, "Email:", contactEmail);
 
     if (!apiKey) {
-      console.error("[API] RESEND_API_KEY is missing");
-      return res.status(500).json({ message: "Missing RESEND_API_KEY in environment" });
+      console.error("[API] BREVO_API_KEY is missing");
+      return res.status(500).json({ message: "Missing BREVO_API_KEY in environment" });
     }
     
     if (!contactEmail) {
@@ -43,10 +43,15 @@ export default async function handler(
       return res.status(500).json({ message: "Missing CONTACT_EMAIL in environment" });
     }
 
-    const resend = new Resend(apiKey);
+    // Configure Brevo API
+    const defaultClient = SibApiV3Sdk.ApiClient.instance;
+    const apiKeyAuth = defaultClient.authentications["api-key"];
+    apiKeyAuth.apiKey = apiKey;
 
-    // Email 1: Send to admin
-    console.log("[API] Sending contact notification to admin...");
+    const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+
+    // Render email templates to HTML
+    console.log("[API] Rendering email templates...");
     const adminHtml = await render(
       AdminContactEmail({
         senderName: validatedData.name,
@@ -55,52 +60,40 @@ export default async function handler(
       })
     );
 
-    const adminResponse = await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: contactEmail,
-      replyTo: validatedData.email,
-      subject: `New Contact Message from ${validatedData.name}`,
-      html: adminHtml,
-    });
-
-    if (adminResponse.error) {
-      console.error("[API] Admin email error:", adminResponse.error);
-      return res.status(500).json({
-        message: `Failed to send notification: ${JSON.stringify(adminResponse.error)}`,
-      });
-    }
-
-    console.log("[API] Admin email sent with ID:", adminResponse.data?.id);
-
-    // Email 2: Send auto-reply to user
-    console.log("[API] Sending auto-reply to user...");
     const userHtml = await render(
       UserAutoReplyEmail({
         recipientName: validatedData.name,
       })
     );
 
-    const userResponse = await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: validatedData.email,
-      subject: "Thanks for reaching out! 🚀",
-      html: userHtml,
-    });
+    // Email 1: Send to admin
+    console.log("[API] Sending contact notification to admin...");
+    const adminEmailRequest = new SibApiV3Sdk.SendSmtpEmail();
+    adminEmailRequest.subject = `New Contact Message from ${validatedData.name}`;
+    adminEmailRequest.htmlContent = adminHtml;
+    adminEmailRequest.sender = { name: "DevHacker Portfolio", email: "noreply@devhacker.com" };
+    adminEmailRequest.to = [{ email: contactEmail, name: "Yassin" }];
+    adminEmailRequest.replyTo = { email: validatedData.email, name: validatedData.name };
 
-    if (userResponse.error) {
-      console.error("[API] User email error:", userResponse.error);
-      return res.status(500).json({
-        message: `Failed to send confirmation: ${JSON.stringify(userResponse.error)}`,
-      });
-    }
+    const adminResponse = await apiInstance.sendTransacEmail(adminEmailRequest);
+    console.log("[API] Admin email sent with ID:", adminResponse.messageId);
 
-    console.log("[API] User email sent with ID:", userResponse.data?.id);
+    // Email 2: Send auto-reply to user
+    console.log("[API] Sending auto-reply to user...");
+    const userEmailRequest = new SibApiV3Sdk.SendSmtpEmail();
+    userEmailRequest.subject = "Thanks for reaching out! 🚀";
+    userEmailRequest.htmlContent = userHtml;
+    userEmailRequest.sender = { name: "Yassin DevHacker", email: "noreply@devhacker.com" };
+    userEmailRequest.to = [{ email: validatedData.email, name: validatedData.name }];
+
+    const userResponse = await apiInstance.sendTransacEmail(userEmailRequest);
+    console.log("[API] User email sent with ID:", userResponse.messageId);
 
     res.status(200).json({
       message: "Emails sent successfully! Admin notified and auto-reply sent to user.",
       data: {
-        adminEmail: adminResponse.data?.id,
-        userEmail: userResponse.data?.id,
+        adminEmail: adminResponse.messageId,
+        userEmail: userResponse.messageId,
       },
     });
   } catch (error: any) {
