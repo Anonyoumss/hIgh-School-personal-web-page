@@ -2,10 +2,6 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist/public",
-  "env": {
-    "RESEND_API_KEY": "@RESEND_API_KEY",
-    "CONTACT_EMAIL": "@CONTACT_EMAIL"
-  },
   "rewrites": [
     {
       "source": "/(.*)",
