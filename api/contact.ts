@@ -45,8 +45,8 @@ export default async function handler(
 
     const resend = new Resend(apiKey);
 
-    // Email 1: Send to admin
-    console.log("[API] Sending contact notification to admin...");
+    // Render email templates to HTML
+    console.log("[API] Rendering email templates...");
     const adminHtml = await render(
       AdminContactEmail({
         senderName: validatedData.name,
@@ -55,6 +55,14 @@ export default async function handler(
       })
     );
 
+    const userHtml = await render(
+      UserAutoReplyEmail({
+        recipientName: validatedData.name,
+      })
+    );
+
+    // Email 1: Send to admin
+    console.log("[API] Sending contact notification to admin...");
     const adminResponse = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: contactEmail,
@@ -74,12 +82,6 @@ export default async function handler(
 
     // Email 2: Send auto-reply to user
     console.log("[API] Sending auto-reply to user...");
-    const userHtml = await render(
-      UserAutoReplyEmail({
-        recipientName: validatedData.name,
-      })
-    );
-
     const userResponse = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: validatedData.email,

@@ -23,33 +23,51 @@ export const AdminContactEmail = ({
       >
         <div
           style={{
-            backgroundColor: "white",
-            borderRadius: "12px",
+            backgroundColor: "#faf8f3",
+            borderRadius: "20px",
             padding: "32px",
             border: "2px solid #1f2937",
             boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+            position: "relative",
           }}
         >
-          <h2
+          {/* Sky Blue Tag */}
+          <div
             style={{
+              position: "absolute",
+              top: "-16px",
+              left: "20px",
+              backgroundColor: "#7dd3fc",
               color: "#1f2937",
-              fontSize: "24px",
+              padding: "4px 16px",
               fontWeight: "bold",
-              margin: "0 0 20px 0",
+              border: "2px solid #1f2937",
+              borderRadius: "6px",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+              transform: "rotate(-2deg)",
+              fontSize: "12px",
             }}
           >
-            📨 New Contact Message
-          </h2>
+            📨 New Message
+          </div>
 
-          <div style={{ borderTop: "2px solid #1f2937", paddingTop: "16px" }}>
-            <div style={{ marginBottom: "24px" }}>
+          <div style={{ paddingTop: "20px" }}>
+            <div
+              style={{
+                backgroundColor: "#e0f2fe",
+                padding: "16px",
+                borderRadius: "12px",
+                border: "2px solid #1f2937",
+                marginBottom: "16px",
+              }}
+            >
               <p
                 style={{
-                  color: "#666",
-                  fontSize: "11px",
+                  color: "#1f2937",
+                  fontSize: "12px",
                   fontWeight: "bold",
                   textTransform: "uppercase",
-                  margin: "0 0 6px 0",
+                  margin: "0 0 4px 0",
                 }}
               >
                 From
@@ -58,7 +76,7 @@ export const AdminContactEmail = ({
                 style={{
                   color: "#1f2937",
                   fontSize: "16px",
-                  fontWeight: "600",
+                  fontWeight: "bold",
                   margin: "0",
                 }}
               >
@@ -66,14 +84,22 @@ export const AdminContactEmail = ({
               </p>
             </div>
 
-            <div style={{ marginBottom: "24px" }}>
+            <div
+              style={{
+                backgroundColor: "#a7f3d0",
+                padding: "16px",
+                borderRadius: "12px",
+                border: "2px solid #1f2937",
+                marginBottom: "16px",
+              }}
+            >
               <p
                 style={{
-                  color: "#666",
-                  fontSize: "11px",
+                  color: "#1f2937",
+                  fontSize: "12px",
                   fontWeight: "bold",
                   textTransform: "uppercase",
-                  margin: "0 0 6px 0",
+                  margin: "0 0 4px 0",
                 }}
               >
                 Email
@@ -84,53 +110,54 @@ export const AdminContactEmail = ({
                   color: "#0066cc",
                   textDecoration: "none",
                   fontSize: "14px",
+                  fontWeight: "bold",
                 }}
               >
                 {senderEmail}
               </a>
             </div>
 
-            <div style={{ marginBottom: "24px" }}>
+            <div
+              style={{
+                backgroundColor: "#fef3c7",
+                padding: "16px",
+                borderRadius: "12px",
+                border: "2px solid #1f2937",
+              }}
+            >
               <p
                 style={{
-                  color: "#666",
-                  fontSize: "11px",
+                  color: "#1f2937",
+                  fontSize: "12px",
                   fontWeight: "bold",
                   textTransform: "uppercase",
-                  margin: "0 0 6px 0",
+                  margin: "0 0 8px 0",
                 }}
               >
                 Message
               </p>
-              <div
+              <p
                 style={{
-                  backgroundColor: "#f3f4f6",
-                  padding: "12px",
-                  borderRadius: "6px",
                   color: "#1f2937",
                   fontSize: "14px",
                   lineHeight: "1.6",
+                  margin: "0",
                   whiteSpace: "pre-wrap",
                   wordWrap: "break-word",
                 }}
               >
                 {message}
-              </div>
+              </p>
             </div>
-          </div>
 
-          <div
-            style={{
-              borderTop: "2px solid #1f2937",
-              paddingTop: "16px",
-              marginTop: "24px",
-            }}
-          >
             <p
               style={{
                 color: "#666",
                 fontSize: "12px",
-                margin: "0",
+                margin: "24px 0 0 0",
+                paddingTop: "16px",
+                borderTop: "2px solid #1f2937",
+                textAlign: "center",
               }}
             >
               Reply directly to {senderEmail} to respond
