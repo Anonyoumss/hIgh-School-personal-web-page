@@ -1,6 +1,8 @@
+
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
 import { z } from "zod";
+import { render } from "@react-email/render";
 import { AdminContactEmail } from "./emails/AdminContactEmail";
 import { UserAutoReplyEmail } from "./emails/UserAutoReplyEmail";
 
@@ -36,27 +38,30 @@ export default async function handler(
       console.error("[API] RESEND_API_KEY is missing");
       return res.status(500).json({ message: "Missing RESEND_API_KEY in environment" });
     }
-
+    
     if (!contactEmail) {
       console.error("[API] CONTACT_EMAIL is missing");
       return res.status(500).json({ message: "Missing CONTACT_EMAIL in environment" });
     }
 
     const resend = new Resend(apiKey);
-    const timestamp = new Date().toLocaleString();
 
+    // Email 1: Send to admin
     console.log("[API] Sending contact notification to admin...");
+    const adminHtml = await render(
+      AdminContactEmail({
+        senderName: validatedData.name,
+        senderEmail: validatedData.email,
+        message: validatedData.message,
+      })
+    );
+
     const adminResponse = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: contactEmail,
       replyTo: validatedData.email,
       subject: `New Contact Message from ${validatedData.name}`,
-      react: AdminContactEmail({
-        senderName: validatedData.name,
-        senderEmail: validatedData.email,
-        message: validatedData.message,
-        timestamp,
-      }),
+      html: adminHtml,
     });
 
     if (adminResponse.error) {
@@ -68,14 +73,19 @@ export default async function handler(
 
     console.log("[API] Admin email sent with ID:", adminResponse.data?.id);
 
+    // Email 2: Send auto-reply to user
     console.log("[API] Sending auto-reply to user...");
+    const userHtml = await render(
+      UserAutoReplyEmail({
+        recipientName: validatedData.name,
+      })
+    );
+
     const userResponse = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: validatedData.email,
       subject: "Thanks for reaching out! 🚀",
-      react: UserAutoReplyEmail({
-        recipientName: validatedData.name,
-      }),
+      html: userHtml,
     });
 
     if (userResponse.error) {
